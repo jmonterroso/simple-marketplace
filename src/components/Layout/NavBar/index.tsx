@@ -4,6 +4,7 @@ import * as Style from './style';
 import MenuIcon from '@mui/icons-material/Menu';
 import { labels } from './constants';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Link as RouterLink } from 'react-router-dom';
 
 export interface Props {
   title?: string;
@@ -28,7 +29,9 @@ const NavBar: React.FC<Props> = ({ title = labels.title, isLoggedIn = false, ite
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>
-            <Button color="inherit">{isLoggedIn ? labels.logout : labels.login}</Button>
+            <Button component={RouterLink} to={'/login'} color="inherit">
+              {isLoggedIn ? labels.logout : labels.login}
+            </Button>
           </Toolbar>
         </AppBar>
       </Box>
