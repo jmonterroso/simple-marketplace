@@ -20,10 +20,9 @@ export interface ILogin {
 export interface Props {
   open: boolean;
   setOpen: (open: boolean) => void;
-  products: IProduct[];
 }
 
-const CartDrawer: React.FC<Props> = ({ open, products, setOpen }) => {
+const CartDrawer: React.FC<Props> = ({ open, setOpen }) => {
   const { cart, total, tax }: ICart = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
   const { setCartQty, deleteFromCart } = bindActionCreators(actionCreators, dispatch);
@@ -65,7 +64,7 @@ const CartDrawer: React.FC<Props> = ({ open, products, setOpen }) => {
               No products in cart
             </Typography>
           )}
-          {products.map((product, idx) => (
+          {cart.map((product, idx) => (
             <Grid item key={idx} mb={1}>
               <ProductListItem
                 key={idx}

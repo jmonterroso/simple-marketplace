@@ -33,7 +33,7 @@ function App() {
             isLoggedIn={isAuthenticated}
             onLogout={() => setAuth({ isAuthenticated: false, user: undefined })}
           />
-          <CartDrawer setOpen={setOpenDrawer} open={openDrawer} products={cart} />
+          <CartDrawer setOpen={setOpenDrawer} open={openDrawer} />
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<ProductList />} />

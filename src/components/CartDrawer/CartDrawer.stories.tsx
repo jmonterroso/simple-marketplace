@@ -3,17 +3,12 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import CartDrawer, { Props } from './index';
 import { MountTestScene } from '../../core/test';
-import { products } from '../../__mocked__/products';
+import { mockProps } from './constants';
 
 export default {
   title: 'CartDrawer',
 } as Meta;
 
-const mockProps: Props = {
-  open: true,
-  setOpen: () => 'noop',
-  products: products,
-};
 const story: Story<Props> = (args) => (
   <MountTestScene>
     <CartDrawer {...args} />

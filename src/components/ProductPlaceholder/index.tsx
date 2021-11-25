@@ -3,7 +3,7 @@ import React from 'react';
 
 const ProductPlaceholder: React.FC = () => {
   return (
-    <Card className="same-height" sx={{ maxWidth: 345 }}>
+    <Card className="same-height" sx={{ maxWidth: 345 }} data-testid={'product-placeholder'}>
       <Skeleton animation="wave" height={140} />
       <CardContent>
         <Skeleton animation="wave" height={14} width="80%" style={{ marginBottom: 6 }} />
