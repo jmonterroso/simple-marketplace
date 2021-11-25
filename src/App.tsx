@@ -18,7 +18,6 @@ import { Box } from '@mui/material';
 function App() {
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
   const { cart }: ICart = useSelector((state: RootState) => state.cart);
-  console.log(cart, 'cart ');
   const [openDrawer, setOpenDrawer] = React.useState(false);
   const itemsCount = cart.reduce((acc, item) => acc + item.qty, 0);
   const dispatch = useDispatch();
