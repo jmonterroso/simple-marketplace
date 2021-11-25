@@ -26,12 +26,12 @@ export interface Props {
 const CartDrawer: React.FC<Props> = ({ open, products, setOpen }) => {
   const { cart, total, tax }: ICart = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
-  const { updateCart, deleteFromCart } = bindActionCreators(actionCreators, dispatch);
+  const { setCartQty, deleteFromCart } = bindActionCreators(actionCreators, dispatch);
   const [alerts, setAlerts] = useState({
     removedFromCart: false,
   });
   const handleAddToCart = (product: IProduct) => {
-    updateCart(product);
+    setCartQty(product);
   };
 
   const hasCartProducts = cart.length > 0;

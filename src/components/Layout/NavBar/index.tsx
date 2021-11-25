@@ -23,7 +23,8 @@ const NavBar: React.FC<Props> = ({ title = labels.title, isLoggedIn = false, ite
             <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+
+            <Typography color="secondary" variant="h6" to={'/'} component={RouterLink} sx={{ flexGrow: 1 }}>
               {title}
             </Typography>
             <IconButton size="large" aria-label={`show ${items} in cart`} color="inherit" onClick={onClickCart}>

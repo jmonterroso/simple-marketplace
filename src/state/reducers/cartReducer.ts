@@ -51,6 +51,15 @@ const removeFromCart = (cart: IProduct[], payload: string) => {
   return cart.filter((item: IProduct) => item.id !== payload);
 };
 
+const setCartQty = (cart: IProduct[], payload: IProduct) => {
+  return cart.map((item: IProduct) => {
+    if (item.id === payload.id) {
+      return { ...item, qty: payload.qty };
+    }
+    return item;
+  });
+};
+
 const cartReducer = (state: ICart = initialState, action: any) => {
   switch (action.type) {
     case 'ADD_TO_CART':
@@ -79,6 +88,14 @@ const cartReducer = (state: ICart = initialState, action: any) => {
         total: calculateTotal(removeFromCart(state.cart, action.payload)),
         tax: calculateTax(removeFromCart(state.cart, action.payload)),
       };
+    case 'SET_CART_QTY':
+      return {
+        ...state,
+        cart: setCartQty(state.cart, action.payload),
+        total: calculateTotal(setCartQty(state.cart, action.payload)),
+        tax: calculateTax(setCartQty(state.cart, action.payload)),
+      };
+
     default:
       return state;
   }

@@ -11,6 +11,7 @@ import { actionCreators } from './state/actions';
 import ProductList from './Pages/ProductList';
 import { ICart } from './state/reducers/cartReducer';
 import CartDrawer from './components/CartDrawer';
+import Checkout from './Pages/Checkout';
 
 function App() {
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
@@ -35,6 +36,7 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<ProductList />} />
+            <Route path="/checkout" element={<Checkout />} />
           </Routes>
         </div>
       </Router>

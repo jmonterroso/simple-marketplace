@@ -1,5 +1,5 @@
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
-import React, { useState } from 'react';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material';
+import React from 'react';
 import * as Style from './style';
 
 export interface ILogin {
@@ -31,7 +31,7 @@ const TotalsTable: React.FC<Props> = ({ total, subtotal, tax = 0 }) => {
   return (
     <Style.Wrapper>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table component={'table'} aria-label="simple table">
           <TableBody>
             <TableRow>
               <TableCell>Subtotal</TableCell>

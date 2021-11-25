@@ -34,3 +34,8 @@ export const deleteFromCart = (payload: string) => ({
   type: 'DELETE_FROM_CART',
   payload,
 });
+
+export const setCartQty = (payload: IProduct) => ({
+  type: 'SET_CART_QTY',
+  payload,
+});
