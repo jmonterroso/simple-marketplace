@@ -20,12 +20,12 @@ export interface IProduct {
 }
 
 export interface Props {
-  addToCart: (qty: IProduct) => void;
+  updateCart: (qty: IProduct) => void;
   removeFromCart: (id: string) => void;
   product: IProduct;
 }
 
-const ProductListItem: React.FC<Props> = ({ addToCart, product, removeFromCart }) => {
+const ProductListItem: React.FC<Props> = ({ updateCart, product, removeFromCart }) => {
   const [currentProduct, setCurrentProduct] = useState<IProduct>({ ...product, qty: product.qty || 1 });
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCurrentProduct({
@@ -33,8 +33,9 @@ const ProductListItem: React.FC<Props> = ({ addToCart, product, removeFromCart }
       qty: parseFloat(event.target.value),
     });
   };
-  const handleAddToCart = () => {
-    addToCart(currentProduct);
+
+  const handleUpdateCart = () => {
+    updateCart(currentProduct);
   };
   return (
     <Style.Wrapper>
@@ -61,6 +62,7 @@ const ProductListItem: React.FC<Props> = ({ addToCart, product, removeFromCart }
           name="qty"
           size={'small'}
           value={currentProduct.qty || 1}
+          onBlur={handleUpdateCart}
           label="Quantity"
           variant="outlined"
         />

@@ -11,7 +11,7 @@ export default {
 
 const mockProps: Props = {
   product: products[0],
-  addToCart: () => 'noop',
+  updateCart: () => 'noop',
   removeFromCart: () => 'noop',
 };
 const story: Story<Props> = (args) => mountScene(<ProductListItem {...args} />);

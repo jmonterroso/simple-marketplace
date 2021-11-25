@@ -29,7 +29,7 @@ const CartDrawer: React.FC<Props> = ({ open, products, setOpen }) => {
     removedFromCart: false,
   });
   const handleAddToCart = (product: IProduct) => {
-    // const existingProduct = cart.find((item) => item.id === product.id);
+    updateCart(product);
   };
 
   const hasCartProducts = cart.length > 0;
@@ -68,7 +68,7 @@ const CartDrawer: React.FC<Props> = ({ open, products, setOpen }) => {
               <ProductListItem
                 key={idx}
                 product={product}
-                addToCart={handleAddToCart}
+                updateCart={handleAddToCart}
                 removeFromCart={handleRemoveFromCart}
               />
             </Grid>
