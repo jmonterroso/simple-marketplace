@@ -44,7 +44,7 @@ const Checkout: React.FC = () => {
           </Grid>
         </Grid>
       )}
-      <Grid container mt={5}>
+      <Grid container mt={5} data-testid={'checkout-title'}>
         <Grid item xs={12} mb={4}>
           <Typography variant="h4" component="h1" gutterBottom>
             Checkout

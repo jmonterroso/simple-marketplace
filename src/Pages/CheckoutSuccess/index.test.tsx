@@ -2,31 +2,22 @@
 
 import React from 'react';
 
-import { fireEvent, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import '@testing-library/jest-dom/extend-expect';
 
 // Imports a specific story for the test
-import { Default } from './ProductList.stories';
+import { Default } from './CheckoutSuccess.stories';
+import { MountTestScene } from '../../core/test';
 
-describe('components/CheckoutSuccess', () => {
-  // it('should render', () => {
-  //   const { getByTestId } = render(<Default {...Default.args} />);
-  //   const navigation = getByTestId('main-navigation');
-  //   expect(navigation).toBeTruthy();
-  // });
-  // it('validates Login/Create Account buttons are rendered', () => {
-  //   const { getByText } = render(<Default {...Default.args} />);
-  //   const loginButton = getByText('Sign In');
-  //   const createAccountButton = getByText('Create Account');
-  //   expect(loginButton).toBeTruthy();
-  //   expect(createAccountButton).toBeTruthy();
-  // });
-  // it('validates Hamburger menu is displayed on click the hamburger button', async () => {
-  //   const { getByTestId } = render(<Default {...Default.args} />);
-  //   const hamburgerBtn = getByTestId('hamburger-btn');
-  //   expect(hamburgerBtn).toBeTruthy();
-  //   fireEvent.click(hamburgerBtn);
-  //   expect(getByTestId('hamburger-menu')).toBeTruthy();
-  // });
+describe('components/Checkout', () => {
+  it('should render', () => {
+    const { getByText } = render(
+      <MountTestScene>
+        <Default {...Default.args} />
+      </MountTestScene>
+    );
+    const thanksMessage = getByText('Thank you for your order!');
+    expect(thanksMessage).toBeTruthy();
+  });
 });
