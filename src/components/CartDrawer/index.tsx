@@ -9,6 +9,8 @@ import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../state/actions';
 import ProductListItem from '../ProductListItem';
 import TotalsTable from '../TotalsTable';
+import Button from '@mui/material/Button';
+import { Link as RouterLink } from 'react-router-dom';
 
 export interface ILogin {
   email: string;
@@ -74,9 +76,23 @@ const CartDrawer: React.FC<Props> = ({ open, products, setOpen }) => {
             </Grid>
           ))}
           {hasCartProducts && (
-            <Grid item>
-              <TotalsTable tax={tax} total={total + (tax || 0)} subtotal={total} />
-            </Grid>
+            <>
+              <Grid item>
+                <TotalsTable tax={tax} total={total + (tax || 0)} subtotal={total} />
+              </Grid>
+              <Grid item>
+                <Button
+                  variant="contained"
+                  onClick={() => setOpen(false)}
+                  component={RouterLink}
+                  to={'/checkout'}
+                  fullWidth
+                  size={'large'}
+                >
+                  Proceed to Checkout
+                </Button>
+              </Grid>
+            </>
           )}
         </Grid>
       </SwipeableDrawer>
