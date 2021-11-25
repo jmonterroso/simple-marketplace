@@ -1,4 +1,4 @@
-import { Paper, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from '@mui/material';
 import React from 'react';
 import * as Style from './style';
 
@@ -42,8 +42,12 @@ const TotalsTable: React.FC<Props> = ({ total, subtotal, tax = 0 }) => {
               <TableCell align="right">{tax === 0 ? '--' : formatCurrency(tax)}</TableCell>
             </TableRow>
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-              <TableCell>Total</TableCell>
-              <TableCell align="right">{formatCurrency(total)}</TableCell>
+              <TableCell>
+                <Typography variant="h6">Total</Typography>
+              </TableCell>
+              <TableCell align="right">
+                <Typography variant="h6">{formatCurrency(total)}</Typography>
+              </TableCell>
             </TableRow>
           </TableBody>
         </Table>
