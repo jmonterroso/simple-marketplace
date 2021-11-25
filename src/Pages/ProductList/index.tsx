@@ -13,6 +13,7 @@ const ProductList: React.FC = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [alerts, setAlerts] = useState({
     outOfStock: false,
+    addedToCart: false,
   });
   const dispatch = useDispatch();
   const { cart }: ICart = useSelector((state: RootState) => state.cart);
@@ -32,6 +33,10 @@ const ProductList: React.FC = () => {
       });
     } else {
       const existingProduct = cart.find((item) => item.id === product.id);
+      setAlerts({
+        ...alerts,
+        addedToCart: true,
+      });
       if (existingProduct) {
         updateCart(product);
       } else {
@@ -49,11 +54,19 @@ const ProductList: React.FC = () => {
         ))}
         <Snackbar
           open={alerts.outOfStock}
-          autoHideDuration={4000}
+          autoHideDuration={2000}
           onClose={() => setAlerts({ ...alerts, outOfStock: false })}
           anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         >
           <Alert severity="error">Product Out of Stock</Alert>
+        </Snackbar>
+        <Snackbar
+          open={alerts.addedToCart}
+          autoHideDuration={2000}
+          onClose={() => setAlerts({ ...alerts, addedToCart: false })}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        >
+          <Alert severity="success">Product Added to Cart</Alert>
         </Snackbar>
       </Grid>
     </Style.Wrapper>
