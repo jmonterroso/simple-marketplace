@@ -10,11 +10,13 @@ import { bindActionCreators } from 'redux';
 import { actionCreators } from './state/actions';
 import ProductList from './Pages/ProductList';
 import { ICart } from './state/reducers/cartReducer';
+import CartDrawer from './components/CartDrawer';
 
 function App() {
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
   const { cart }: ICart = useSelector((state: RootState) => state.cart);
   console.log(cart, 'cart ');
+  const [openDrawer, setOpenDrawer] = React.useState(false);
   const itemsCount = cart.reduce((acc, item) => {
     console.log(acc, 'acc ');
     console.log(item, 'item.qty ');
@@ -29,9 +31,11 @@ function App() {
         <div className="App">
           <NavBar
             items={itemsCount}
+            onClickCart={() => setOpenDrawer(true)}
             isLoggedIn={isAuthenticated}
             onLogout={() => setAuth({ isAuthenticated: false, user: undefined })}
           />
+          <CartDrawer setOpen={setOpenDrawer} open={openDrawer} products={cart} />
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<ProductList />} />

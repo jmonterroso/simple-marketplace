@@ -25,7 +25,6 @@ const ProductList: React.FC = () => {
     fetchData();
   }, []);
   const handleAddToCart = (product: IProduct) => {
-    console.log('Add to cart', product);
     if (product.qty && product?.qty > product.stock) {
       setAlerts({
         ...alerts,
@@ -34,7 +33,6 @@ const ProductList: React.FC = () => {
     } else {
       const existingProduct = cart.find((item) => item.id === product.id);
       if (existingProduct) {
-        console.log('updating product');
         updateCart(product);
       } else {
         addToCart(product);

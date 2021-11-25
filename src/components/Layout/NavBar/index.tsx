@@ -11,9 +11,10 @@ export interface Props {
   isLoggedIn: boolean;
   items?: number;
   onLogout: () => void;
+  onClickCart: () => void;
 }
 
-const NavBar: React.FC<Props> = ({ title = labels.title, isLoggedIn = false, items = 0, onLogout }) => {
+const NavBar: React.FC<Props> = ({ title = labels.title, isLoggedIn = false, items = 0, onLogout, onClickCart }) => {
   return (
     <Style.Wrapper>
       <Box sx={{ flexGrow: 1 }}>
@@ -25,7 +26,7 @@ const NavBar: React.FC<Props> = ({ title = labels.title, isLoggedIn = false, ite
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               {title}
             </Typography>
-            <IconButton size="large" aria-label={`show ${items} in cart`} color="inherit">
+            <IconButton size="large" aria-label={`show ${items} in cart`} color="inherit" onClick={onClickCart}>
               <Badge badgeContent={items} color="error">
                 <ShoppingCartIcon />
               </Badge>
