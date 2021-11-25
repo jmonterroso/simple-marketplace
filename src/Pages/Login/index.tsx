@@ -12,7 +12,7 @@ export interface Props {
   onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-export const Login: React.FC<Props> = ({ children }) => {
+export const Login: React.FC<Props> = () => {
   const dispatch = useDispatch();
   const { setAuth } = bindActionCreators(actionCreators, dispatch);
   const [loginState, setLoginState] = useState({
