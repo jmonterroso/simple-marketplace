@@ -5,6 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './state/store';
+import { debounce } from 'debounce';
+import { saveState } from './core/localStorage';
+// here we subscribe to the store changes
+store.subscribe(
+  // we use debounce to save the state once each 800ms
+  // for better performances in case multiple changes occur in a short time
+  debounce(() => {
+    saveState(store.getState());
+  }, 800)
+);
 
 ReactDOM.render(
   <React.StrictMode>

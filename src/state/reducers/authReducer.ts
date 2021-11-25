@@ -6,6 +6,7 @@ export interface IUser {
 export interface IAuth {
   isAuthenticated: boolean;
   user?: IUser;
+  loading?: boolean;
 }
 const initialState: IAuth = {
   isAuthenticated: false,
@@ -18,6 +19,12 @@ const authReducer = (state = initialState, action: any) => {
         ...state,
         isAuthenticated: action.payload.isAuthenticated,
         user: action.payload.user,
+        loading: false,
+      };
+    case 'AUTH_LOADING':
+      return {
+        ...state,
+        loading: true,
       };
     case 'LOGOUT':
       return {

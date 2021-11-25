@@ -1,5 +1,5 @@
 import { ThemeProvider } from '@mui/material/styles';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { theme } from './theme';
 import NavBar from './components/Layout/NavBar';
@@ -9,6 +9,10 @@ import Login from './Pages/Login';
 
 function App() {
   const { isAuthenticated, user } = useSelector((state: RootState) => state.auth);
+  useEffect(() => {
+    console.log('bioy');
+    console.log(isAuthenticated, 'isAuthenticated ');
+  }, [isAuthenticated]);
   return (
     <ThemeProvider theme={theme}>
       <Router>
