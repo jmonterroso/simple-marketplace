@@ -1,6 +1,7 @@
 import { ILogin } from '../components/LoginForm';
 // this can be replaced by a env variable in production
-const BASE_URL = process.env.API_URL || 'http://localhost:8080';
+const BASE_URL =
+  process.env.NODE_ENV === 'production' ? 'https://obscure-ocean-06187.herokuapp.com' : 'http://localhost:8080';
 
 export const loginPost = async (value: ILogin) =>
   fetch(`${BASE_URL}/auth/login`, {
