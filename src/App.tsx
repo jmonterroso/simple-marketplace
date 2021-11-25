@@ -13,6 +13,7 @@ import { ICart } from './state/reducers/cartReducer';
 import CartDrawer from './components/CartDrawer';
 import Checkout from './Pages/Checkout';
 import CheckoutSuccess from './Pages/CheckoutSuccess';
+import { Box } from '@mui/material';
 
 function App() {
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
@@ -26,21 +27,23 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <div className="App">
-          <NavBar
-            items={itemsCount}
-            onClickCart={() => setOpenDrawer(true)}
-            isLoggedIn={isAuthenticated}
-            onLogout={() => setAuth({ isAuthenticated: false, user: undefined })}
-          />
-          <CartDrawer setOpen={setOpenDrawer} open={openDrawer} />
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/" element={<ProductList />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/checkout/success" element={<CheckoutSuccess />} />
-          </Routes>
-        </div>
+        <Box pt={8}>
+          <div className="App">
+            <NavBar
+              items={itemsCount}
+              onClickCart={() => setOpenDrawer(true)}
+              isLoggedIn={isAuthenticated}
+              onLogout={() => setAuth({ isAuthenticated: false, user: undefined })}
+            />
+            <CartDrawer setOpen={setOpenDrawer} open={openDrawer} />
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/" element={<ProductList />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/checkout/success" element={<CheckoutSuccess />} />
+            </Routes>
+          </div>
+        </Box>
       </Router>
     </ThemeProvider>
   );
