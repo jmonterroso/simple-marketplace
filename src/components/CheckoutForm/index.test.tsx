@@ -10,23 +10,30 @@ import '@testing-library/jest-dom/extend-expect';
 import { Default } from './CheckoutForm.stories';
 
 describe('components/CheckoutForm', () => {
-  // it('should render', () => {
-  //   const { getByTestId } = render(<Default {...Default.args} />);
-  //   const navigation = getByTestId('main-navigation');
-  //   expect(navigation).toBeTruthy();
-  // });
-  // it('validates Login/Create Account buttons are rendered', () => {
-  //   const { getByText } = render(<Default {...Default.args} />);
-  //   const loginButton = getByText('Sign In');
-  //   const createAccountButton = getByText('Create Account');
-  //   expect(loginButton).toBeTruthy();
-  //   expect(createAccountButton).toBeTruthy();
-  // });
-  // it('validates Hamburger menu is displayed on click the hamburger button', async () => {
-  //   const { getByTestId } = render(<Default {...Default.args} />);
-  //   const hamburgerBtn = getByTestId('hamburger-btn');
-  //   expect(hamburgerBtn).toBeTruthy();
-  //   fireEvent.click(hamburgerBtn);
-  //   expect(getByTestId('hamburger-menu')).toBeTruthy();
-  // });
+  it('should render', () => {
+    const { getByText } = render(<Default {...Default.args} onSubmit={() => 'noop'} />);
+    const completePaymentButtonText = getByText('Complete Payment');
+    expect(completePaymentButtonText).toBeTruthy();
+  });
+  it('should call on submit on send form', () => {
+    const onSubmit = jest.fn();
+    const { getByText, getByTestId } = render(<Default {...Default.args} onSubmit={onSubmit} />);
+    const nameInput = getByTestId('name');
+    const ccInput = getByTestId('cc');
+    const ccExpiryInput = getByTestId('ccExpiry');
+    const cvvInput = getByTestId('cvv');
+    const addressInput = getByTestId('address');
+    const countryInput = getByTestId('country');
+    const zipInput = getByTestId('zip');
+
+    fireEvent.change(nameInput, { target: { value: '123' } });
+    fireEvent.change(ccInput, { target: { value: '123' } });
+    fireEvent.change(ccExpiryInput, { target: { value: '123' } });
+    fireEvent.change(cvvInput, { target: { value: '123' } });
+    fireEvent.change(addressInput, { target: { value: '123' } });
+    fireEvent.change(countryInput, { target: { value: '123' } });
+    fireEvent.change(zipInput, { target: { value: '123' } });
+    fireEvent.click(getByText('Complete Payment'));
+    expect(onSubmit).toHaveBeenCalled();
+  });
 });

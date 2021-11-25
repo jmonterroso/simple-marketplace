@@ -49,6 +49,9 @@ const CheckoutForm: React.FC<Props> = ({ onSubmit }) => {
         <Grid container direction={'column'} spacing={5} pr={4}>
           <Grid item>
             <TextField
+              inputProps={{
+                'data-testid': 'name',
+              }}
               type={'name'}
               fullWidth
               name={'name'}
@@ -61,6 +64,9 @@ const CheckoutForm: React.FC<Props> = ({ onSubmit }) => {
           </Grid>
           <Grid item>
             <TextField
+              inputProps={{
+                'data-testid': 'cc',
+              }}
               type={'text'}
               fullWidth
               required
@@ -74,6 +80,9 @@ const CheckoutForm: React.FC<Props> = ({ onSubmit }) => {
           <Grid item>
             <TextField
               type={'text'}
+              inputProps={{
+                'data-testid': 'ccExpiry',
+              }}
               name={'ccExpiry'}
               required
               label={'Expiry Date'}
@@ -84,6 +93,9 @@ const CheckoutForm: React.FC<Props> = ({ onSubmit }) => {
             />
             <TextField
               type={'text'}
+              inputProps={{
+                'data-testid': 'cvv',
+              }}
               name={'cvv'}
               label={'CVV'}
               required
@@ -101,6 +113,9 @@ const CheckoutForm: React.FC<Props> = ({ onSubmit }) => {
           <Grid item>
             <TextField
               type={'text'}
+              inputProps={{
+                'data-testid': 'address',
+              }}
               name={'address'}
               required
               label={'Address'}
@@ -113,6 +128,9 @@ const CheckoutForm: React.FC<Props> = ({ onSubmit }) => {
           <Grid item>
             <TextField
               type={'text'}
+              inputProps={{
+                'data-testid': 'country',
+              }}
               name={'country'}
               label={'Country'}
               required
@@ -125,6 +143,9 @@ const CheckoutForm: React.FC<Props> = ({ onSubmit }) => {
             <TextField
               type={'text'}
               name={'zip'}
+              inputProps={{
+                'data-testid': 'zip',
+              }}
               label={'Zip Code'}
               required
               variant={'outlined'}
