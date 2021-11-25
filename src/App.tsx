@@ -17,11 +17,7 @@ function App() {
   const { cart }: ICart = useSelector((state: RootState) => state.cart);
   console.log(cart, 'cart ');
   const [openDrawer, setOpenDrawer] = React.useState(false);
-  const itemsCount = cart.reduce((acc, item) => {
-    console.log(acc, 'acc ');
-    console.log(item, 'item.qty ');
-    return acc + item.qty;
-  }, 0);
+  const itemsCount = cart.reduce((acc, item) => acc + item.qty, 0);
   const dispatch = useDispatch();
   const { setAuth } = bindActionCreators(actionCreators, dispatch);
 

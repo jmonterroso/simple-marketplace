@@ -30,3 +30,7 @@ export const updateCart = (payload: IProduct) => ({
   type: 'UPDATE_CART',
   payload,
 });
+export const deleteFromCart = (payload: string) => ({
+  type: 'DELETE_FROM_CART',
+  payload,
+});

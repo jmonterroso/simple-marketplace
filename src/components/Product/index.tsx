@@ -55,6 +55,7 @@ const Product: React.FC<Props> = ({ addToCart, product }) => {
             fullWidth
             id="qty"
             name="qty"
+            size={'small'}
             value={currentProduct.qty || 1}
             label="Quantity"
             variant="outlined"
