@@ -7,26 +7,43 @@ import { fireEvent, render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
 // Imports a specific story for the test
-import { Default } from './ProductListItem.stories';
+import { Default, mockProps } from './ProductListItem.stories';
+import { MountTestScene } from '../../core/test';
 
 describe('components/ProductListItem', () => {
-  // it('should render', () => {
-  //   const { getByTestId } = render(<Default {...Default.args} />);
-  //   const navigation = getByTestId('main-navigation');
-  //   expect(navigation).toBeTruthy();
-  // });
-  // it('validates Login/Create Account buttons are rendered', () => {
-  //   const { getByText } = render(<Default {...Default.args} />);
-  //   const loginButton = getByText('Sign In');
-  //   const createAccountButton = getByText('Create Account');
-  //   expect(loginButton).toBeTruthy();
-  //   expect(createAccountButton).toBeTruthy();
-  // });
-  // it('validates Hamburger menu is displayed on click the hamburger button', async () => {
-  //   const { getByTestId } = render(<Default {...Default.args} />);
-  //   const hamburgerBtn = getByTestId('hamburger-btn');
-  //   expect(hamburgerBtn).toBeTruthy();
-  //   fireEvent.click(hamburgerBtn);
-  //   expect(getByTestId('hamburger-menu')).toBeTruthy();
-  // });
+  it('should render', () => {
+    const { getByText } = render(
+      <MountTestScene>
+        <Default {...Default.args} {...mockProps} />
+      </MountTestScene>
+    );
+    const product = getByText('Product 1');
+    const price = getByText('$10.00');
+
+    expect(product).toBeTruthy();
+    expect(price).toBeTruthy();
+  });
+  it('should call the delete function on click', () => {
+    const removeFromCart = jest.fn();
+    const { getByTestId } = render(
+      <MountTestScene>
+        <Default {...Default.args} {...mockProps} removeFromCart={removeFromCart} />
+      </MountTestScene>
+    );
+    const button = getByTestId('remove-product');
+    fireEvent.click(button);
+    expect(removeFromCart).toHaveBeenCalled();
+  });
+  it('should call the update function on change input', () => {
+    const updateCart = jest.fn();
+    const { getByTestId } = render(
+      <MountTestScene>
+        <Default {...Default.args} {...mockProps} updateCart={updateCart} />
+      </MountTestScene>
+    );
+    const input = getByTestId('update-product-input');
+    fireEvent.change(input, { target: { value: '3' } });
+    fireEvent.blur(input);
+    expect(updateCart).toHaveBeenCalled();
+  });
 });

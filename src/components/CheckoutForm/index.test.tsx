@@ -7,7 +7,7 @@ import { fireEvent, render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
 // Imports a specific story for the test
-import { Default } from './Checkout.stories';
+import { Default } from './CheckoutForm.stories';
 
 describe('components/CheckoutForm', () => {
   // it('should render', () => {

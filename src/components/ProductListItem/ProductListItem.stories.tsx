@@ -9,7 +9,7 @@ export default {
   title: 'ProductListItem',
 } as Meta;
 
-const mockProps: Props = {
+export const mockProps: Props = {
   product: products[0],
   updateCart: () => 'noop',
   removeFromCart: () => 'noop',

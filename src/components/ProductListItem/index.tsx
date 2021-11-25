@@ -41,7 +41,12 @@ const ProductListItem: React.FC<Props> = ({ updateCart, product, removeFromCart 
     <Style.Wrapper>
       <ListItem
         secondaryAction={
-          <IconButton edge="end" aria-label="delete" onClick={() => removeFromCart(currentProduct.id)}>
+          <IconButton
+            data-testid={'remove-product'}
+            edge="end"
+            aria-label="delete"
+            onClick={() => removeFromCart(currentProduct.id)}
+          >
             <DeleteIcon />
           </IconButton>
         }
@@ -65,6 +70,9 @@ const ProductListItem: React.FC<Props> = ({ updateCart, product, removeFromCart 
           onBlur={handleUpdateCart}
           label="Quantity"
           variant="outlined"
+          inputProps={{
+            'data-testid': 'update-product-input',
+          }}
         />
       </ListItem>
     </Style.Wrapper>
