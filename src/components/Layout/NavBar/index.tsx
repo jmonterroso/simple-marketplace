@@ -10,9 +10,10 @@ export interface Props {
   title?: string;
   isLoggedIn: boolean;
   items?: number;
+  onLogout: () => void;
 }
 
-const NavBar: React.FC<Props> = ({ title = labels.title, isLoggedIn = false, items = 0 }) => {
+const NavBar: React.FC<Props> = ({ title = labels.title, isLoggedIn = false, items = 0, onLogout }) => {
   return (
     <Style.Wrapper>
       <Box sx={{ flexGrow: 1 }}>
@@ -29,9 +30,15 @@ const NavBar: React.FC<Props> = ({ title = labels.title, isLoggedIn = false, ite
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>
-            <Button component={RouterLink} to={'/login'} color="inherit">
-              {isLoggedIn ? labels.logout : labels.login}
-            </Button>
+            {isLoggedIn ? (
+              <Button onClick={onLogout} color="inherit">
+                {labels.logout}
+              </Button>
+            ) : (
+              <Button component={RouterLink} to={'/login'} color="inherit">
+                {labels.login}
+              </Button>
+            )}
           </Toolbar>
         </AppBar>
       </Box>
