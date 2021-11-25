@@ -38,8 +38,6 @@ const CheckoutForm: React.FC<Props> = ({ onSubmit }) => {
   };
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    console.log(name, 'name ');
-    console.log(value, 'value ');
     setFormState({ ...formState, [name]: value });
   };
 

@@ -38,13 +38,12 @@ const ProductList: React.FC = () => {
       });
     }
     const existingProduct = cart.find((item) => item.id === product.id);
-    console.log(existingProduct);
     setAlerts({
       ...alerts,
       addedToCart: true,
     });
     if (existingProduct) {
-      updateCart(existingProduct);
+      updateCart(product);
     } else {
       addToCart(product);
     }
