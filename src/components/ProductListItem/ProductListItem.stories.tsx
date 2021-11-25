@@ -3,22 +3,16 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import ProductListItem, { Props } from './index';
 import { mountScene } from '../../core/test';
+import { products } from '../../__mocked__/products';
 
 export default {
   title: 'ProductListItem',
 } as Meta;
 
 const mockProps: Props = {
-  product: {
-    id: '1',
-    price: 20,
-    name: 'Apple',
-    description: 'Macintosh',
-    sku: '1234',
-  },
-  addToCart: () => {
-    console.log('add to cart');
-  },
+  product: products[0],
+  addToCart: () => 'noop',
+  removeFromCart: () => 'noop',
 };
 const story: Story<Props> = (args) => mountScene(<ProductListItem {...args} />);
 

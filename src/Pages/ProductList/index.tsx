@@ -71,7 +71,7 @@ const ProductList: React.FC = () => {
       </Grid>
       <Grid container spacing={2} mt={5}>
         {products.map((product, idx) => (
-          <Grid item xs={12} sm={4} key={idx} mb={5} justifyContent={'center'} alignItems={'center'}>
+          <Grid item xs={12} sm={4} key={idx} mt={'auto'}>
             <Product addToCart={handleAddToCart} product={product} />
           </Grid>
         ))}

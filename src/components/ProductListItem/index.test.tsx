@@ -7,7 +7,7 @@ import { fireEvent, render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
 // Imports a specific story for the test
-import { Default } from './Product.stories';
+import { Default } from './ProductListItem.stories';
 
 describe('components/ProductListItem', () => {
   // it('should render', () => {

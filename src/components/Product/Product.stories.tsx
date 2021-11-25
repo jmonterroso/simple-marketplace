@@ -3,19 +3,14 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import Product, { Props } from './index';
 import { mountScene } from '../../core/test';
+import { products } from '../../__mocked__/products';
 
 export default {
   title: 'Product',
 } as Meta;
 
 const mockProps: Props = {
-  product: {
-    id: '1',
-    price: 20,
-    name: 'Apple',
-    description: 'Macintosh',
-    sku: '1234',
-  },
+  product: products[0],
   addToCart: () => {
     console.log('add to cart');
   },

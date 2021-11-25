@@ -36,7 +36,7 @@ const Product: React.FC<Props> = ({ addToCart, product }) => {
   };
   return (
     <Style.Wrapper>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card className="same-height" sx={{ maxWidth: 345 }}>
         <CardMedia component="img" height="140" image={product.image} alt={product.name} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
@@ -46,7 +46,7 @@ const Product: React.FC<Props> = ({ addToCart, product }) => {
             {product.description} <br />
             {product.sku}
           </Typography>
-          <Typography variant="body2" color="text.secondary" mb={3}>
+          <Typography variant="subtitle1" color="text.secondary" mb={3}>
             {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(parseFloat(product.price))}
           </Typography>
           <TextField
