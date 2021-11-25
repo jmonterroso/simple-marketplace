@@ -40,7 +40,7 @@ const Product: React.FC<Props> = ({ addToCart, product }) => {
         <CardMedia component="img" height="140" image={product.image} alt={product.name} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {product.name}
+            {product.name} - {product.id}
           </Typography>
           <Typography variant="body2" color="text.secondary" mb={2}>
             {product.description} <br />

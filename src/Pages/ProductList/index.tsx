@@ -32,17 +32,17 @@ const ProductList: React.FC = () => {
         ...alerts,
         outOfStock: true,
       });
+    }
+    const existingProduct = cart.find((item) => item.id === product.id);
+    console.log(existingProduct);
+    setAlerts({
+      ...alerts,
+      addedToCart: true,
+    });
+    if (existingProduct) {
+      updateCart(existingProduct);
     } else {
-      const existingProduct = cart.find((item) => item.id === product.id);
-      setAlerts({
-        ...alerts,
-        addedToCart: true,
-      });
-      if (existingProduct) {
-        updateCart(product);
-      } else {
-        addToCart(product);
-      }
+      addToCart(product);
     }
   };
 
@@ -72,7 +72,7 @@ const ProductList: React.FC = () => {
       <Grid container spacing={2} mt={5}>
         {products.map((product, idx) => (
           <Grid item xs={12} sm={4} key={idx} mb={5} justifyContent={'center'} alignItems={'center'}>
-            <Product addToCart={handleAddToCart} key={idx} product={product} />
+            <Product addToCart={handleAddToCart} product={product} />
           </Grid>
         ))}
         <Snackbar
