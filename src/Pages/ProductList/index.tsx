@@ -1,21 +1,4 @@
-import {
-  Alert,
-  Box,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  CircularProgress,
-  Grid,
-  IconButton,
-  InputBase,
-  Paper,
-  Skeleton,
-  Snackbar,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Alert, Grid, IconButton, InputBase, Paper, Snackbar } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import * as Style from './style';
 import { fetchProducts } from '../../api';
@@ -81,8 +64,8 @@ const ProductList: React.FC = () => {
   return (
     <Style.Wrapper>
       <Grid container mt={4} lg={12}>
-        <Grid item width={'100%'}>
-          <Paper component="form" sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: '100%' }}>
+        <Grid item width={'40%'}>
+          <Paper component="div" sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: '100%' }}>
             <InputBase onChange={searchProducts} fullWidth={true} sx={{ ml: 1, mr: 1, flex: 1 }} placeholder="Search" />
             <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
               <SearchIcon />
@@ -108,7 +91,7 @@ const ProductList: React.FC = () => {
           </Grid>
         </Grid>
       )}
-      {products.length && (
+      {products.length ? (
         <Grid container spacing={2} mt={5}>
           {products.map((product, idx) => (
             <Grid item xs={12} sm={4} key={idx} mt={'auto'}>
@@ -132,7 +115,7 @@ const ProductList: React.FC = () => {
             <Alert severity="success">Product Added to Cart</Alert>
           </Snackbar>
         </Grid>
-      )}
+      ) : null}
     </Style.Wrapper>
   );
 };
