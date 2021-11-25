@@ -8,25 +8,29 @@ import '@testing-library/jest-dom/extend-expect';
 
 // Imports a specific story for the test
 import { Default } from './Product.stories';
+import { MountTestScene } from '../../core/test';
+import { mockProps } from './constants';
 
 describe('components/Product', () => {
-  // it('should render', () => {
-  //   const { getByTestId } = render(<Default {...Default.args} />);
-  //   const navigation = getByTestId('main-navigation');
-  //   expect(navigation).toBeTruthy();
-  // });
-  // it('validates Login/Create Account buttons are rendered', () => {
-  //   const { getByText } = render(<Default {...Default.args} />);
-  //   const loginButton = getByText('Sign In');
-  //   const createAccountButton = getByText('Create Account');
-  //   expect(loginButton).toBeTruthy();
-  //   expect(createAccountButton).toBeTruthy();
-  // });
-  // it('validates Hamburger menu is displayed on click the hamburger button', async () => {
-  //   const { getByTestId } = render(<Default {...Default.args} />);
-  //   const hamburgerBtn = getByTestId('hamburger-btn');
-  //   expect(hamburgerBtn).toBeTruthy();
-  //   fireEvent.click(hamburgerBtn);
-  //   expect(getByTestId('hamburger-menu')).toBeTruthy();
-  // });
+  it('should render', () => {
+    const { getByText } = render(
+      <MountTestScene>
+        <Default {...Default.args} {...mockProps} />
+      </MountTestScene>
+    );
+    const title = getByText('Product 1 - 1');
+
+    expect(title).toBeTruthy();
+  });
+  it('should call the addToCart function on click', () => {
+    const addToCartFn = jest.fn();
+    const { getByText } = render(
+      <MountTestScene>
+        <Default {...Default.args} {...mockProps} addToCart={addToCartFn} />
+      </MountTestScene>
+    );
+    const button = getByText('Add to Cart');
+    fireEvent.click(button);
+    expect(addToCartFn).toHaveBeenCalled();
+  });
 });

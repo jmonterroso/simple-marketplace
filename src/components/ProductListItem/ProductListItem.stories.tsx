@@ -3,17 +3,12 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import ProductListItem, { Props } from './index';
 import { mountScene } from '../../core/test';
-import { products } from '../../__mocked__/products';
+import { mockProps } from './constants';
 
 export default {
   title: 'ProductListItem',
 } as Meta;
 
-export const mockProps: Props = {
-  product: products[0],
-  updateCart: () => 'noop',
-  removeFromCart: () => 'noop',
-};
 const story: Story<Props> = (args) => mountScene(<ProductListItem {...args} />);
 
 export const Default = story.bind({});

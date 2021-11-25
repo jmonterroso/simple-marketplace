@@ -8,25 +8,28 @@ import '@testing-library/jest-dom/extend-expect';
 
 // Imports a specific story for the test
 import { Default } from './TotalsTable.stories';
+import { MountTestScene } from '../../core/test';
+import { mockProps } from './constants';
 
-describe('components/TotalsTable', () => {
-  // it('should render', () => {
-  //   const { getByTestId } = render(<Default {...Default.args} />);
-  //   const navigation = getByTestId('main-navigation');
-  //   expect(navigation).toBeTruthy();
-  // });
-  // it('validates Login/Create Account buttons are rendered', () => {
-  //   const { getByText } = render(<Default {...Default.args} />);
-  //   const loginButton = getByText('Sign In');
-  //   const createAccountButton = getByText('Create Account');
-  //   expect(loginButton).toBeTruthy();
-  //   expect(createAccountButton).toBeTruthy();
-  // });
-  // it('validates Hamburger menu is displayed on click the hamburger button', async () => {
-  //   const { getByTestId } = render(<Default {...Default.args} />);
-  //   const hamburgerBtn = getByTestId('hamburger-btn');
-  //   expect(hamburgerBtn).toBeTruthy();
-  //   fireEvent.click(hamburgerBtn);
-  //   expect(getByTestId('hamburger-menu')).toBeTruthy();
-  // });
+describe('components/ProductListItem', () => {
+  it('should render', () => {
+    const { getByText } = render(
+      <MountTestScene>
+        <Default {...Default.args} {...mockProps} />
+      </MountTestScene>
+    );
+    const subTotalLabel = getByText('Subtotal');
+    const subTotal = getByText('$500.00');
+    const tax = getByText('$200.00');
+    const taxLabel = getByText('Tax');
+    const total = getByText('$700.00');
+    const totalLabel = getByText('Total');
+
+    expect(subTotal).toBeTruthy();
+    expect(subTotalLabel).toBeTruthy();
+    expect(taxLabel).toBeTruthy();
+    expect(tax).toBeTruthy();
+    expect(totalLabel).toBeTruthy();
+    expect(total).toBeTruthy();
+  });
 });

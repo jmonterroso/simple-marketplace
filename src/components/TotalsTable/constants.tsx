@@ -1,5 +1,7 @@
-export const labels = {
-  title: 'n',
-  login: 'Login',
-  logout: 'Logout',
+import { Props } from './index';
+
+export const mockProps: Props = {
+  tax: 200,
+  subtotal: 500,
+  total: 700,
 };
