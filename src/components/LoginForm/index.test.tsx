@@ -10,23 +10,19 @@ import '@testing-library/jest-dom/extend-expect';
 import { Default } from './LoginForm.stories';
 
 describe('components/LoginForm', () => {
-  // it('should render', () => {
-  //   const { getByTestId } = render(<Default {...Default.args} />);
-  //   const navigation = getByTestId('main-navigation');
-  //   expect(navigation).toBeTruthy();
-  // });
-  // it('validates Login/Create Account buttons are rendered', () => {
-  //   const { getByText } = render(<Default {...Default.args} />);
-  //   const loginButton = getByText('Sign In');
-  //   const createAccountButton = getByText('Create Account');
-  //   expect(loginButton).toBeTruthy();
-  //   expect(createAccountButton).toBeTruthy();
-  // });
-  // it('validates Hamburger menu is displayed on click the hamburger button', async () => {
-  //   const { getByTestId } = render(<Default {...Default.args} />);
-  //   const hamburgerBtn = getByTestId('hamburger-btn');
-  //   expect(hamburgerBtn).toBeTruthy();
-  //   fireEvent.click(hamburgerBtn);
-  //   expect(getByTestId('hamburger-menu')).toBeTruthy();
-  // });
+  it('should render', () => {
+    const { getByText } = render(<Default {...Default.args} onSubmit={() => 'noop'} />);
+    const loginBtn = getByText('Login');
+    expect(loginBtn).toBeTruthy();
+  });
+  it('should call on submit on send form', () => {
+    const onSubmit = jest.fn();
+    const { getByTestId } = render(<Default {...Default.args} onSubmit={onSubmit} />);
+    const email = getByTestId('email');
+    const password = getByTestId('password');
+    fireEvent.change(email, { target: { value: 'admin@admin.com' } });
+    fireEvent.change(password, { target: { value: 'admin' } });
+    fireEvent.click(getByTestId('login-btn'));
+    expect(onSubmit).toHaveBeenCalled();
+  });
 });

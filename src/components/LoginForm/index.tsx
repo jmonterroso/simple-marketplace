@@ -36,6 +36,9 @@ const LoginForm: React.FC<Props> = ({ onSubmit }) => {
               fullWidth
               id="email"
               name="email"
+              inputProps={{
+                'data-testid': 'email',
+              }}
               label="Email"
               variant="standard"
               onChange={handleChange}
@@ -43,6 +46,9 @@ const LoginForm: React.FC<Props> = ({ onSubmit }) => {
           </Grid>
           <Grid item>
             <TextField
+              inputProps={{
+                'data-testid': 'password',
+              }}
               type="password"
               fullWidth
               id="password"
@@ -53,7 +59,7 @@ const LoginForm: React.FC<Props> = ({ onSubmit }) => {
             />
           </Grid>
           <Grid item>
-            <Button fullWidth type="submit" variant="contained" color="primary">
+            <Button data-testid={'login-btn'} fullWidth type="submit" variant="contained" color="primary">
               Login
             </Button>
           </Grid>
