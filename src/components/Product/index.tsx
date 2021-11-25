@@ -10,48 +10,44 @@ export interface ILogin {
 export interface IProduct {
   id: string;
   name: string;
+  image: string;
   description: string;
-  price: number;
+  price: string;
   sku: string;
-  qty?: number;
+  qty: number;
+  stock: number;
 }
 
 export interface Props {
-  addToCart: (qty: number) => void;
+  addToCart: (qty: IProduct) => void;
   product: IProduct;
 }
 
 const Product: React.FC<Props> = ({ addToCart, product }) => {
-  const [currentProduct, setCurrentProduct] = useState<IProduct>(product);
+  const [currentProduct, setCurrentProduct] = useState<IProduct>({ ...product, qty: product.qty || 1 });
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCurrentProduct({
       ...currentProduct,
-      qty: parseInt(event.target.value),
+      qty: parseFloat(event.target.value),
     });
   };
   const handleAddToCart = () => {
-    addToCart(currentProduct.qty || 1);
+    addToCart(currentProduct);
   };
   return (
     <Style.Wrapper>
       <Card sx={{ maxWidth: 345 }}>
-        <CardMedia
-          component="img"
-          height="140"
-          image="https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=webp&v=1530129081"
-          alt="green iguana"
-        />
+        <CardMedia component="img" height="140" image={product.image} alt={product.name} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {product.name}
           </Typography>
           <Typography variant="body2" color="text.secondary" mb={2}>
-            Description:
             {product.description} <br />
-            SKU: {product.sku}
+            {product.sku}
           </Typography>
           <Typography variant="body2" color="text.secondary" mb={3}>
-            {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.price)}
+            {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(parseFloat(product.price))}
           </Typography>
           <TextField
             onChange={handleChange}
@@ -59,13 +55,13 @@ const Product: React.FC<Props> = ({ addToCart, product }) => {
             fullWidth
             id="qty"
             name="qty"
-            value={currentProduct.qty}
+            value={currentProduct.qty || 1}
             label="Quantity"
             variant="outlined"
           />
         </CardContent>
         <CardActions>
-          <Button fullWidth size="small" color={'primary'} onClick={handleAddToCart}>
+          <Button fullWidth size="small" variant="contained" color="primary" onClick={handleAddToCart}>
             Add to Cart
           </Button>
         </CardActions>

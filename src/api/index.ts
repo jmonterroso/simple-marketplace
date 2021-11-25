@@ -12,3 +12,13 @@ export const loginPost = async (value: ILogin) =>
   })
     .then((res) => res.json())
     .then((res) => res);
+
+export const fetchProducts = async () =>
+  fetch(`${BASE_URL}/products`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((res) => res.json())
+    .then((res) => res);

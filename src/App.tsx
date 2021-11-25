@@ -8,9 +8,18 @@ import { RootState } from './state/reducers';
 import Login from './Pages/Login';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from './state/actions';
+import ProductList from './Pages/ProductList';
+import { ICart } from './state/reducers/cartReducer';
 
 function App() {
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+  const { cart }: ICart = useSelector((state: RootState) => state.cart);
+  console.log(cart, 'cart ');
+  const itemsCount = cart.reduce((acc, item) => {
+    console.log(acc, 'acc ');
+    console.log(item, 'item.qty ');
+    return acc + item.qty;
+  }, 0);
   const dispatch = useDispatch();
   const { setAuth } = bindActionCreators(actionCreators, dispatch);
 
@@ -18,9 +27,14 @@ function App() {
     <ThemeProvider theme={theme}>
       <Router>
         <div className="App">
-          <NavBar isLoggedIn={isAuthenticated} onLogout={() => setAuth({ isAuthenticated: false, user: undefined })} />
+          <NavBar
+            items={itemsCount}
+            isLoggedIn={isAuthenticated}
+            onLogout={() => setAuth({ isAuthenticated: false, user: undefined })}
+          />
           <Routes>
             <Route path="/login" element={<Login />} />
+            <Route path="/" element={<ProductList />} />
           </Routes>
         </div>
       </Router>
