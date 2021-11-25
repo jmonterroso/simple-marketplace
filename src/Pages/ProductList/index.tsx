@@ -1,4 +1,21 @@
-import { Alert, Grid, IconButton, InputBase, Paper, Snackbar } from '@mui/material';
+import {
+  Alert,
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  CircularProgress,
+  Grid,
+  IconButton,
+  InputBase,
+  Paper,
+  Skeleton,
+  Snackbar,
+  TextField,
+  Typography,
+} from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import * as Style from './style';
 import { fetchProducts } from '../../api';
@@ -9,6 +26,7 @@ import { actionCreators } from '../../state/actions';
 import { RootState } from '../../state/reducers';
 import { ICart } from '../../state/reducers/cartReducer';
 import SearchIcon from '@mui/icons-material/Search';
+import ProductPlaceholder from '../../components/ProductPlaceholder';
 
 const ProductList: React.FC = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -19,11 +37,14 @@ const ProductList: React.FC = () => {
   const dispatch = useDispatch();
   const { cart }: ICart = useSelector((state: RootState) => state.cart);
   const { addToCart, updateCart } = bindActionCreators(actionCreators, dispatch);
+  const [loadingProducts, setLoadingProducts] = useState(false);
   const fetchData = async () => {
     const productsFetched = await fetchProducts();
     setProducts(productsFetched);
+    setLoadingProducts(false);
   };
   useEffect(() => {
+    setLoadingProducts(true);
     fetchData();
   }, []);
   const handleAddToCart = (product: IProduct) => {
@@ -69,29 +90,49 @@ const ProductList: React.FC = () => {
           </Paper>
         </Grid>
       </Grid>
-      <Grid container spacing={2} mt={5}>
-        {products.map((product, idx) => (
-          <Grid item xs={12} sm={4} key={idx} mt={'auto'}>
-            <Product addToCart={handleAddToCart} product={product} />
+
+      {loadingProducts && (
+        <Grid container spacing={2} mt={5}>
+          {new Array(15).fill(0).map((_, index) => (
+            <Grid item xs={12} sm={4} mt={'auto'} key={index}>
+              <ProductPlaceholder />
+            </Grid>
+          ))}
+        </Grid>
+      )}
+
+      {!loadingProducts && products.length === 0 && (
+        <Grid container spacing={2} mt={5}>
+          <Grid item lg={4} xs={12} mx={'auto'} px={{ textAlign: 'center' }}>
+            <p>No Products Found</p>
           </Grid>
-        ))}
-        <Snackbar
-          open={alerts.outOfStock}
-          autoHideDuration={2000}
-          onClose={() => setAlerts({ ...alerts, outOfStock: false })}
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        >
-          <Alert severity="error">Product Out of Stock</Alert>
-        </Snackbar>
-        <Snackbar
-          open={alerts.addedToCart}
-          autoHideDuration={2000}
-          onClose={() => setAlerts({ ...alerts, addedToCart: false })}
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        >
-          <Alert severity="success">Product Added to Cart</Alert>
-        </Snackbar>
-      </Grid>
+        </Grid>
+      )}
+      {products.length && (
+        <Grid container spacing={2} mt={5}>
+          {products.map((product, idx) => (
+            <Grid item xs={12} sm={4} key={idx} mt={'auto'}>
+              <Product addToCart={handleAddToCart} product={product} />
+            </Grid>
+          ))}
+          <Snackbar
+            open={alerts.outOfStock}
+            autoHideDuration={2000}
+            onClose={() => setAlerts({ ...alerts, outOfStock: false })}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+          >
+            <Alert severity="error">Product Out of Stock</Alert>
+          </Snackbar>
+          <Snackbar
+            open={alerts.addedToCart}
+            autoHideDuration={2000}
+            onClose={() => setAlerts({ ...alerts, addedToCart: false })}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+          >
+            <Alert severity="success">Product Added to Cart</Alert>
+          </Snackbar>
+        </Grid>
+      )}
     </Style.Wrapper>
   );
 };
