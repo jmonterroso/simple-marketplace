@@ -1,5 +1,7 @@
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../src/theme';
+import store from '../src/state/store';
+import { Provider } from 'react-redux';
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
@@ -12,8 +14,10 @@ export const parameters = {
 
 export const decorators = [
   (Story) => (
-    <ThemeProvider theme={theme}>
-      <Story />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <Story />
+      </ThemeProvider>
+    </Provider>
   ),
 ];
